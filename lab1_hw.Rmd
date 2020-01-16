@@ -6,6 +6,8 @@ output:
   html_document:
     theme: spacelab
     toc: no
+  pdf_document:
+    toc: no
 ---
 
 ## Instructions
