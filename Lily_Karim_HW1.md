@@ -7,14 +7,39 @@ output:
     keep_md: yes
 ---
 
+## Instructions
+Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code, keep track of your versions using git, and push your final work to our [GitHub repository](https://github.com/FRS417-DataScienceBiologists). I will randomly select a few examples of student work at the start of each session to use as examples so be sure that your code is working to the best of your ability.  
+
 ```r
-options(repos="https://cran.rstudio.com" )
+library("tidyverse")
+```
+
+```
+## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0
+```
+
+```
+## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 
+1. Navigate to the R console and calculate the following expressions.  
+  + 5 - 3 * 2  
+  + 8 / 2 ** 2  
+_The first equation equals -1 and the second equation equals 2._
 
-1. The first equation equals -1 and the second equation equals 2.
-2. Based on the order of operations, these results did not surprise me
+2. Did any of the results in #1 surprise you? Write two programs that calculate each expression such that the result for the first example is 4 and the second example is 16.  
+_Based on the order of operations, these results did not surprise me._
+
 
 ```r
 a <- 5
@@ -29,7 +54,6 @@ print(d)
 ```
 
 
-
 ```r
 a <- 8
 b <- 2
@@ -42,13 +66,14 @@ print(d)
 ## [1] 16
 ```
 
-3.
+3. Make a new object `pi` as 3.14159265359.  
 
 ```r
 pi <- 3.1415926539
 ```
 
-4. pi is a numeric because it is not a whole number
+4. Is `pi` an integer or numeric? Why? Show your code.  
+_pi is a numeric because it is not a whole number_  
 
 ```r
 class(pi)
@@ -58,18 +83,40 @@ class(pi)
 ## [1] "numeric"
 ```
 
-5.
-a
+5. You have decided to use your new analytical powers in R to become a professional gambler. Here are your winnings and losses this week. Note that you don't gamble on the weekends!  
+
+a. Build a new vector called `days` for the days of the week. 
 
 ```r
 blackjack <- c(140, -20, 70, -120, 240, NA, NA)
 roulette <- c(60, 50, 120, -300, 10, NA, NA)
 days <- c("M", "Tu","W","Th","F","S","Su")
+```
+
+
+```r
 names(blackjack) <- days
 names(roulette) <- days
-print(blackjack)
 ```
-b. 
+
+
+```r
+blackjack
+```
+
+```
+##    M   Tu    W   Th    F    S   Su 
+##  140  -20   70 -120  240   NA   NA
+```
+
+We will use `days` to name the elements in the poker and roulette vectors.
+
+```r
+days <- c("M", "Tu","W","Th","F","S","Su")
+names(blackjack) <- days
+```
+
+b. Calculate how much you won or lost in blackjack over the week.  
 
 ```r
 blackjack <- c(140, -20, 70, -120, 240, NA, NA)
@@ -79,7 +126,10 @@ sum(blackjack)
 ```
 ## [1] NA
 ```
-c. When summing the blackjack vector, the result is NA because variables in the vector are NA. To find the sum, the 
+
+c. What is your interpretation of this result? What do you need to do to address the problem? Recalculate how much you won or lost in blackjack over the week.  
+
+_When summing the blackjack vector, the result is NA because variables in the vector are NA. To find the sum, the NA's need to be removed._
 
 ```r
 new_blackjack <- na.omit(blackjack)
@@ -105,7 +155,7 @@ sum(new_blackjack)
 The blackjack earnings for the week are actually positive $310 
 
 
-d.
+d. Calculate how much you won or lost in roulette over the week.  
 
 ```r
 roulette <- c(60, 50, 120, -300, 10, NA, NA)
@@ -121,8 +171,10 @@ print(new_roulette)
 ## [1] "omit"
 ```
 
-e. Build a `total_week` vector to show how much you lost or won on each day over the week. Which days seem lucky or unlucky for you?
-Monday, Wednesday and Friday were all lucky in that there were high positive earnings. Thursday was very unlucky with 420 dollars in losses. Tueday had positive earnings but they were not very high.
+e. Build a `total_week` vector to show how much you lost or won on each day over the week. Which days seem lucky or unlucky for you?  
+
+_Monday, Wednesday and Friday were all lucky in that there were high positive earnings. Thursday was very unlucky with 420 dollars in losses. Tueday had positive earnings but they were not very high._  
+
 
 ```r
 #to calculate values for total_week vector
@@ -139,9 +191,8 @@ print(totals)
 total_week <- c(200, 30,190,-420,250, NA,NA)
 ```
 
-
 f. Should you stick to blackjack or roulette? Write a program that verifies this below.
-Blackjack earns more money, stick to blackjack
+_Blackjack earns more money, stick to blackjack._
 
 ```r
 b <- sum(new_blackjack)
@@ -153,4 +204,3 @@ if (r < b) {print("blackjack")}
 ```
 ## [1] "blackjack"
 ```
-
