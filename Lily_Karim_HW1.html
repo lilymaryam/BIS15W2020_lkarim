@@ -369,10 +369,31 @@ summary {
 </div>
 
 
-<pre class="r"><code>options(repos=&quot;https://cran.rstudio.com&quot; )</code></pre>
+<div id="instructions" class="section level2">
+<h2>Instructions</h2>
+<p>Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code, keep track of your versions using git, and push your final work to our <a href="https://github.com/FRS417-DataScienceBiologists">GitHub repository</a>. I will randomly select a few examples of student work at the start of each session to use as examples so be sure that your code is working to the best of your ability.</p>
+<pre class="r"><code>library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
 <ol style="list-style-type: decimal">
-<li>The first equation equals -1 and the second equation equals 2.</li>
-<li>Based on the order of operations, these results did not surprise me</li>
+<li>Navigate to the R console and calculate the following expressions.<br />
+</li>
+</ol>
+<ul>
+<li>5 - 3 * 2<br />
+</li>
+<li>8 / 2 ** 2<br />
+<em>The first equation equals -1 and the second equation equals 2.</em></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Did any of the results in #1 surprise you? Write two programs that calculate each expression such that the result for the first example is 4 and the second example is 16.<br />
+<em>Based on the order of operations, these results did not surprise me.</em></li>
 </ol>
 <pre class="r"><code>a &lt;- 5
 b &lt;- 3
@@ -387,32 +408,42 @@ d = c ** 2
 print(d)</code></pre>
 <pre><code>## [1] 16</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li></li>
+<li>Make a new object <code>pi</code> as 3.14159265359.</li>
 </ol>
 <pre class="r"><code>pi &lt;- 3.1415926539</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>pi is a numeric because it is not a whole number</li>
+<li>Is <code>pi</code> an integer or numeric? Why? Show your code.<br />
+<em>pi is a numeric because it is not a whole number</em></li>
 </ol>
 <pre class="r"><code>class(pi)</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>a</li>
+<li>You have decided to use your new analytical powers in R to become a professional gambler. Here are your winnings and losses this week. Note that you don’t gamble on the weekends!</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Build a new vector called <code>days</code> for the days of the week.</li>
 </ol>
 <pre class="r"><code>blackjack &lt;- c(140, -20, 70, -120, 240, NA, NA)
 roulette &lt;- c(60, 50, 120, -300, 10, NA, NA)
-days &lt;- c(&quot;M&quot;, &quot;Tu&quot;,&quot;W&quot;,&quot;Th&quot;,&quot;F&quot;,&quot;S&quot;,&quot;Su&quot;)
-names(blackjack) &lt;- days
-names(roulette) &lt;- days
-print(blackjack)</code></pre>
+days &lt;- c(&quot;M&quot;, &quot;Tu&quot;,&quot;W&quot;,&quot;Th&quot;,&quot;F&quot;,&quot;S&quot;,&quot;Su&quot;)</code></pre>
+<pre class="r"><code>names(blackjack) &lt;- days
+names(roulette) &lt;- days</code></pre>
+<pre class="r"><code>blackjack</code></pre>
+<pre><code>##    M   Tu    W   Th    F    S   Su 
+##  140  -20   70 -120  240   NA   NA</code></pre>
+<p>We will use <code>days</code> to name the elements in the poker and roulette vectors.</p>
+<pre class="r"><code>days &lt;- c(&quot;M&quot;, &quot;Tu&quot;,&quot;W&quot;,&quot;Th&quot;,&quot;F&quot;,&quot;S&quot;,&quot;Su&quot;)
+names(blackjack) &lt;- days</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
-<li></li>
+<li>Calculate how much you won or lost in blackjack over the week.</li>
 </ol>
 <pre class="r"><code>blackjack &lt;- c(140, -20, 70, -120, 240, NA, NA)
 sum(blackjack)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
-<li>When summing the blackjack vector, the result is NA because variables in the vector are NA. To find the sum, the</li>
+<li>What is your interpretation of this result? What do you need to do to address the problem? Recalculate how much you won or lost in blackjack over the week.</li>
 </ol>
+<p><em>When summing the blackjack vector, the result is NA because variables in the vector are NA. To find the sum, the NA’s need to be removed.</em></p>
 <pre class="r"><code>new_blackjack &lt;- na.omit(blackjack)
 print(new_blackjack)</code></pre>
 <pre><code>## [1]  140  -20   70 -120  240
@@ -424,7 +455,7 @@ print(new_blackjack)</code></pre>
 <pre><code>## [1] 310</code></pre>
 <p>The blackjack earnings for the week are actually positive $310</p>
 <ol start="4" style="list-style-type: lower-alpha">
-<li></li>
+<li>Calculate how much you won or lost in roulette over the week.</li>
 </ol>
 <pre class="r"><code>roulette &lt;- c(60, 50, 120, -300, 10, NA, NA)
 new_roulette &lt;- na.omit(roulette)
@@ -435,21 +466,23 @@ print(new_roulette)</code></pre>
 ## attr(,&quot;class&quot;)
 ## [1] &quot;omit&quot;</code></pre>
 <ol start="5" style="list-style-type: lower-alpha">
-<li>Build a <code>total_week</code> vector to show how much you lost or won on each day over the week. Which days seem lucky or unlucky for you? Monday, Wednesday and Friday were all lucky in that there were high positive earnings. Thursday was very unlucky with 420 dollars in losses. Tueday had positive earnings but they were not very high.</li>
+<li>Build a <code>total_week</code> vector to show how much you lost or won on each day over the week. Which days seem lucky or unlucky for you?</li>
 </ol>
+<p><em>Monday, Wednesday and Friday were all lucky in that there were high positive earnings. Thursday was very unlucky with 420 dollars in losses. Tueday had positive earnings but they were not very high.</em></p>
 <pre class="r"><code>#to calculate values for total_week vector
 totals &lt;- c(blackjack + roulette)
 print(totals)</code></pre>
 <pre><code>## [1]  200   30  190 -420  250   NA   NA</code></pre>
 <pre class="r"><code>total_week &lt;- c(200, 30,190,-420,250, NA,NA)</code></pre>
 <ol start="6" style="list-style-type: lower-alpha">
-<li>Should you stick to blackjack or roulette? Write a program that verifies this below. Blackjack earns more money, stick to blackjack</li>
+<li>Should you stick to blackjack or roulette? Write a program that verifies this below. <em>Blackjack earns more money, stick to blackjack.</em></li>
 </ol>
 <pre class="r"><code>b &lt;- sum(new_blackjack)
 r &lt;- sum(new_roulette)
 if (b &lt; r) {print(&quot;roulette&quot;)} 
 if (r &lt; b) {print(&quot;blackjack&quot;)}</code></pre>
 <pre><code>## [1] &quot;blackjack&quot;</code></pre>
+</div>
 
 
 
