@@ -8,29 +8,7 @@ output:
 ---
 
 ## Instructions
-Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code, keep track of your versions using git, and push your final work to our [GitHub repository](https://github.com/FRS417-DataScienceBiologists). I will randomly select a few examples of student work at the start of each session to use as examples so be sure that your code is working to the best of your ability.  
-
-```r
-library("tidyverse")
-```
-
-```
-## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
-
-```
-## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
-## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
-## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.4.0
-```
-
-```
-## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
+Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your final lab report should be organized, clean, and run free from errors. Remember, you must remove the `#` for the included code chunks to run.  
 
 1. Navigate to the R console and calculate the following expressions.  
   + 5 - 3 * 2  
@@ -204,3 +182,6 @@ if (r < b) {print("blackjack")}
 ```
 ## [1] "blackjack"
 ```
+
+## Push your final code to GitHub!
+Please be sure that you check the `keep md` file in the knit preferences.  
