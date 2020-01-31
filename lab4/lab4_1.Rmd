@@ -28,8 +28,8 @@ The  quote sums above sums up much of the work in data science. Simply put, most
 - [pivoting](https://cran.r-project.org/web/packages/tidyr/vignettes/pivot.html)  
 
 ## Load the tidyverse
-```{r message=FALSE, warning=FALSE}
-library(tidyverse)
+```{r}
+library(tidyverse) #make sure tidyverse is up to date
 ```
 
 ## Tidy data
