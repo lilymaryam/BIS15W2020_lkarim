@@ -1,0 +1,156 @@
+---
+title: "HW 1"
+author: "Lily Karim"
+date: "1/13/2020"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```r
+options(repos="https://cran.rstudio.com" )
+```
+
+
+
+1. The first equation equals -1 and the second equation equals 2.
+2. Based on the order of operations, these results did not surprise me
+
+```r
+a <- 5
+b <- 3
+c <- a - b
+d = c * 2
+print(d)
+```
+
+```
+## [1] 4
+```
+
+
+
+```r
+a <- 8
+b <- 2
+c <- a/b
+d = c ** 2
+print(d)
+```
+
+```
+## [1] 16
+```
+
+3.
+
+```r
+pi <- 3.1415926539
+```
+
+4. pi is a numeric because it is not a whole number
+
+```r
+class(pi)
+```
+
+```
+## [1] "numeric"
+```
+
+5.
+a
+
+```r
+blackjack <- c(140, -20, 70, -120, 240, NA, NA)
+roulette <- c(60, 50, 120, -300, 10, NA, NA)
+days <- c("M", "Tu","W","Th","F","S","Su")
+names(blackjack) <- days
+names(roulette) <- days
+print(blackjack)
+```
+b. 
+
+```r
+blackjack <- c(140, -20, 70, -120, 240, NA, NA)
+sum(blackjack)
+```
+
+```
+## [1] NA
+```
+c. When summing the blackjack vector, the result is NA because variables in the vector are NA. To find the sum, the 
+
+```r
+new_blackjack <- na.omit(blackjack)
+print(new_blackjack)
+```
+
+```
+## [1]  140  -20   70 -120  240
+## attr(,"na.action")
+## [1] 6 7
+## attr(,"class")
+## [1] "omit"
+```
+
+```r
+sum(new_blackjack)
+```
+
+```
+## [1] 310
+```
+
+The blackjack earnings for the week are actually positive $310 
+
+
+d.
+
+```r
+roulette <- c(60, 50, 120, -300, 10, NA, NA)
+new_roulette <- na.omit(roulette)
+print(new_roulette)
+```
+
+```
+## [1]   60   50  120 -300   10
+## attr(,"na.action")
+## [1] 6 7
+## attr(,"class")
+## [1] "omit"
+```
+
+e. Build a `total_week` vector to show how much you lost or won on each day over the week. Which days seem lucky or unlucky for you?
+Monday, Wednesday and Friday were all lucky in that there were high positive earnings. Thursday was very unlucky with 420 dollars in losses. Tueday had positive earnings but they were not very high.
+
+```r
+#to calculate values for total_week vector
+totals <- c(blackjack + roulette)
+print(totals)
+```
+
+```
+## [1]  200   30  190 -420  250   NA   NA
+```
+
+
+```r
+total_week <- c(200, 30,190,-420,250, NA,NA)
+```
+
+
+f. Should you stick to blackjack or roulette? Write a program that verifies this below.
+Blackjack earns more money, stick to blackjack
+
+```r
+b <- sum(new_blackjack)
+r <- sum(new_roulette)
+if (b < r) {print("roulette")} 
+if (r < b) {print("blackjack")}
+```
+
+```
+## [1] "blackjack"
+```
+
