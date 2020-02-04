@@ -10,7 +10,9 @@ output:
 options(repos="https://cran.rstudio.com" )
 ```
 
-
+install.packages("stringi")
+install.packages("stringr")
+install.packages("tidyverse")
 
 1. The first equation equals -1 and the second equation equals 2.
 2. Based on the order of operations, these results did not surprise me
