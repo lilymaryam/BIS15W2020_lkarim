@@ -51,7 +51,7 @@ expenditures
 1. Are these data tidy? Please use `pivot_longer()` to tidy the data. Here we use back ticks on the column names so R does not confuse them with numerical indices.
 ```{r}
 expenditures %>% 
-  `pivot_longer`(1940:1955,
+  pivot_longer(`1940`:`1955`,
                names_to = "year",
                values_to = "cost")
 ```

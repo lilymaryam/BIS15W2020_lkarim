@@ -3,9 +3,9 @@ title: "Lab 4 Homework"
 author: "Please Add Your Name Here"
 date: "Please Add the Date Here"
 output:
-  html_document:
+  html_document: 
+    keep_md: yes
     theme: spacelab
-    toc: no
 ---
 
 ```{r setup, include=FALSE}
@@ -22,22 +22,50 @@ library(tidyverse)
 
 For this assignment we are going to work with a large dataset from the [United Nations Food and Agriculture Organization](http://www.fao.org/about/en/) on world fisheries. First, load the data.  
 
-1. Load the data `FAO_1950to2012_111914.csv` as a new object titled `fisheries`.
+1. Load the data `FAO_1950to2012_111914.csv` as a new object titled `fisheries`.\
+```{r}
+fisheries <- readr::read_csv("data/FAO_1950to2012_111914.csv")
+```
+
 
 
 2. What are the names of the columns? Do you see any potential problems with the column names?
+```{r}
+colnames(fisheries)
+```
+
 
 
 3. What is the structure of the data? Show the classes of each variable.
+```{r}
+str(fisheries)
+```
+
 
 
 4. Think about the classes. Will any present problems? Make any changes you think are necessary below.
+```{r}
+fisheries <- fisheries %>% 
+  mutate_at(vars(9:71), as.numeric, na.rm = TRUE) %>% 
+  mutate_if(is.character, as.factor)
+  
+
+sapply(fisheries, class)
+```
+
 
 
 5. How many countries are represented in the data? Provide a count.
+```{r}
+nlevels(fisheries$Country)
+```
+
 
 
 6. What are the names of the countries?
+```{r}
+levels(fisheries$Country)
+```
 
 
 7. Use `rename()` to rename the columns and make them easier to use. The new column names should be:  
@@ -49,35 +77,153 @@ For this assignment we are going to work with a large dataset from the [United N
 + ISSCAAP_spgroupname
 + FAO_area
 + unit
+```{r}
+fisheries <- 
+  fisheries %>% 
+  dplyr::rename(country = Country,
+                commname = `Common name`,
+                ISSCAAP_spgroup = `ISSCAAP group#`,
+                ASFIS_spcode =`ASFIS species#`,
+                ASFIS_sciname = `ASFIS species name`,
+               ISSCAAP_spgroupname = `ISSCAAP taxonomic group`,
+               FAO_area = `FAO major fishing area`,
+               unit = Measure)
+fisheries
+               
+```
 
-8. Are these data tidy? Why or why not, and, how do you know? Use the appropriate pivot function to tidy the data. Remove the NA's. Put the tidy data frame into a new object `fisheries_tidy`.  
+
+8. Are these data tidy? Why or why not, and, how do you know? Use the appropriate pivot function to tidy the data. Remove the NA's. Put the tidy data frame into a new object `fisheries_tidy`. 
+The data is not tidy because all of the year columns are data and should be pivotted longer.
+```{r}
+fisheries_tidy <- 
+  fisheries %>% 
+  pivot_longer(`1950`:`2012`,
+               names_to = "year",
+               values_to = "catch")
+fisheries_tidy
+```
+
 
 
 9. Refocus the data only to include country, ISSCAAP_spgroupname, ASFIS_spcode, ASFIS_sciname, year, and catch.
+```{r}
+fisheries_tidy2 <- 
+  fisheries_tidy %>% 
+  select(country, ISSCAAP_spgroupname, ASFIS_spcode, ASFIS_sciname, year, catch)
+fisheries_tidy2
+```
+
 
 
 10. Re-check the classes of `fisheries_tidy2`. Notice that "catch" is shown as a character! This is a problem because we will want to treat it as a numeric. How will you deal with this?
+I already dealt with this when the classes needed to be fixed
+```{r}
+str(fisheries_tidy2)
+catch1 <- fisheries_tidy2$catch
+class(catch1)
+```
+
 
 
 11. Based on the ASFIS_spcode, how many distinct taxa were caught as part of these data?
+```{r}
+nlevels(fisheries_tidy2$ASFIS_spcode)
+```
 
 
-12. Which country had the largest overall catch in the year 2000?
+
+12. Which country had the largest overall catch in the year 2000? #ask about this one
+Peru had the largest catch.
+```{r}
+fisheries_tidy2 %>% 
+  group_by(country) %>% 
+  filter(year == 2000) %>% 
+  summarise(catch = sum(catch, na.rm = TRUE)) %>% 
+  arrange(desc(catch))
+
+  
+```
+
+
+
+
 
 
 13. Which country caught the most sardines (_Sardina_) between the years 1990-2000?
+Morocco has the largest sardine catch
+```{r}
+fisheries_tidy2 %>% 
+  filter(str_detect(ASFIS_sciname, "Sardina")) %>% 
+  filter(year >= 1990 & year <= 2000) %>%
+  group_by(country) %>% 
+  summarize(catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(catch))
+  
+  
+```
+
 
 
 14. Which five countries caught the most cephalopods between 2008-2012?
+The top 5 countries are China, Peru, Korea, Japan, and Chile.
+```{r}
+fisheries_tidy2 %>% 
+  filter(str_detect(ISSCAAP_spgroupname, "Squids")) %>% 
+  filter(year <=2012 &year >=2008) %>% 
+  group_by(country) %>% 
+  
+  summarise(catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(catch))
+```
+
 
 
 15. Given the top five countries from question 12 above, which species was the highest catch total? The lowest?
+The species with the highest catch total of the five countries was Dosiducus gigas with 784022 and the species witht the lowest catch total was Moroteuthis ingens with 2. 
+```{r}
+cephalopod_stats <- 
+  fisheries_tidy2 %>% 
+  filter(country == c("China", "Peru", "Korea", "Japan", "Chile")) %>% 
+  filter(str_detect(ISSCAAP_spgroupname, "Squids")) %>% 
+  filter(year <=2012 &year >=2008) %>% 
+  group_by(ASFIS_sciname) %>% 
+  summarise(catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(catch)) 
+
+cephalopod_stats
+
+```
+
 
 
 16. In some cases, the taxonomy of the fish being caught is unclear. Make a new data frame called `coastal_fish` that shows the taxonomic composition of "Miscellaneous coastal fishes" within the ISSCAAP_spgroupname column.
 
+```{r}
+coastal_fish <- 
+  fisheries_tidy2 %>% 
+  filter(ISSCAAP_spgroupname == "Miscellaneous coastal fishes") %>% 
+  as.data.frame() 
+coastal_fish
+  
+```
+
 
 17. Use the data to do at least one exploratory analysis of your choice. What can you learn?
+I want to know which country caught the most octopus in 1963.
+The answer is Italy
+
+
+
+```{r}
+fisheries_tidy %>% 
+  filter(str_detect(commname, "octopus")) %>% 
+  filter(year == 1963) %>% 
+  group_by(country) %>% 
+  summarise(catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(catch))
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   
