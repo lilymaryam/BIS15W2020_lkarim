@@ -136,6 +136,7 @@ ggplot removes NAs
 ```{r}
 ggplot(data = homerange, mapping = aes(x =log10.hra, y = log10.preymass)) + geom_point(na.rm=T)
 ```
+
 ```{r}
 ggplot(data = homerange, mapping = aes(x =taxon, y = log10.preymass)) + geom_point(na.rm=T)
 ```
