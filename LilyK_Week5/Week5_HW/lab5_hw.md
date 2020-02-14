@@ -20,18 +20,18 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+## <U+2500><U+2500> Attaching packages <U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500> tidyverse 1.3.0 <U+2500><U+2500>
 ```
 
 ```
-## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
-## ✓ tibble  2.1.3     ✓ dplyr   0.8.4
-## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.4.0
+## <U+2713> ggplot2 3.2.1     <U+2713> purrr   0.3.3
+## <U+2713> tibble  2.1.3     <U+2713> dplyr   0.8.3
+## <U+2713> tidyr   1.0.0     <U+2713> stringr 1.4.0
+## <U+2713> readr   1.3.1     <U+2713> forcats 0.4.0
 ```
 
 ```
-## ── Conflicts ───────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## <U+2500><U+2500> Conflicts <U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500><U+2500> tidyverse_conflicts() <U+2500><U+2500>
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -414,19 +414,19 @@ amniota
 
 ```
 ## # A tibble: 21,322 x 36
-##    class order family genus species subspecies common_name female_maturity…
+##    class order family genus species subspecies common_name female_maturity<U+2026>
 ##    <chr> <chr> <chr>  <chr> <chr>        <dbl> <chr>                  <dbl>
-##  1 Aves  Acci… Accip… Acci… albogu…       -999 Pied Gosha…            -999 
-##  2 Aves  Acci… Accip… Acci… badius        -999 Shikra                  363.
-##  3 Aves  Acci… Accip… Acci… bicolor       -999 Bicolored …            -999 
-##  4 Aves  Acci… Accip… Acci… brachy…       -999 New Britai…            -999 
-##  5 Aves  Acci… Accip… Acci… brevip…       -999 Levant Spa…             363.
-##  6 Aves  Acci… Accip… Acci… castan…       -999 Chestnut-f…            -999 
-##  7 Aves  Acci… Accip… Acci… chilen…       -999 Chilean Ha…            -999 
-##  8 Aves  Acci… Accip… Acci… chiono…       -999 White-brea…             548.
-##  9 Aves  Acci… Accip… Acci… cirroc…       -999 Collared S…            -999 
-## 10 Aves  Acci… Accip… Acci… cooper…       -999 Cooper's H…             730 
-## # … with 21,312 more rows, and 28 more variables:
+##  1 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> albogu<U+2026>       -999 Pied Gosha<U+2026>            -999 
+##  2 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> badius        -999 Shikra                  363.
+##  3 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> bicolor       -999 Bicolored <U+2026>            -999 
+##  4 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> brachy<U+2026>       -999 New Britai<U+2026>            -999 
+##  5 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> brevip<U+2026>       -999 Levant Spa<U+2026>             363.
+##  6 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> castan<U+2026>       -999 Chestnut-f<U+2026>            -999 
+##  7 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> chilen<U+2026>       -999 Chilean Ha<U+2026>            -999 
+##  8 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> chiono<U+2026>       -999 White-brea<U+2026>             548.
+##  9 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> cirroc<U+2026>       -999 Collared S<U+2026>            -999 
+## 10 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> cooper<U+2026>       -999 Cooper's H<U+2026>             730 
+## # <U+2026> with 21,312 more rows, and 28 more variables:
 ## #   litter_or_clutch_size_n <dbl>, litters_or_clutches_per_y <dbl>,
 ## #   adult_body_mass_g <dbl>, maximum_longevity_y <dbl>, gestation_d <dbl>,
 ## #   weaning_d <dbl>, birth_or_hatching_weight_g <dbl>, weaning_weight_g <dbl>,
@@ -449,19 +449,19 @@ amniota
 
 ```
 ## # A tibble: 21,322 x 36
-##    class order family genus species subspecies common_name female_maturity…
+##    class order family genus species subspecies common_name female_maturity<U+2026>
 ##    <chr> <chr> <chr>  <chr> <chr>        <dbl> <chr>                  <dbl>
-##  1 Aves  Acci… Accip… Acci… albogu…         NA Pied Gosha…              NA 
-##  2 Aves  Acci… Accip… Acci… badius          NA Shikra                  363.
-##  3 Aves  Acci… Accip… Acci… bicolor         NA Bicolored …              NA 
-##  4 Aves  Acci… Accip… Acci… brachy…         NA New Britai…              NA 
-##  5 Aves  Acci… Accip… Acci… brevip…         NA Levant Spa…             363.
-##  6 Aves  Acci… Accip… Acci… castan…         NA Chestnut-f…              NA 
-##  7 Aves  Acci… Accip… Acci… chilen…         NA Chilean Ha…              NA 
-##  8 Aves  Acci… Accip… Acci… chiono…         NA White-brea…             548.
-##  9 Aves  Acci… Accip… Acci… cirroc…         NA Collared S…              NA 
-## 10 Aves  Acci… Accip… Acci… cooper…         NA Cooper's H…             730 
-## # … with 21,312 more rows, and 28 more variables:
+##  1 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> albogu<U+2026>         NA Pied Gosha<U+2026>              NA 
+##  2 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> badius          NA Shikra                  363.
+##  3 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> bicolor         NA Bicolored <U+2026>              NA 
+##  4 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> brachy<U+2026>         NA New Britai<U+2026>              NA 
+##  5 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> brevip<U+2026>         NA Levant Spa<U+2026>             363.
+##  6 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> castan<U+2026>         NA Chestnut-f<U+2026>              NA 
+##  7 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> chilen<U+2026>         NA Chilean Ha<U+2026>              NA 
+##  8 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> chiono<U+2026>         NA White-brea<U+2026>             548.
+##  9 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> cirroc<U+2026>         NA Collared S<U+2026>              NA 
+## 10 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> cooper<U+2026>         NA Cooper's H<U+2026>             730 
+## # <U+2026> with 21,312 more rows, and 28 more variables:
 ## #   litter_or_clutch_size_n <dbl>, litters_or_clutches_per_y <dbl>,
 ## #   adult_body_mass_g <dbl>, maximum_longevity_y <dbl>, gestation_d <dbl>,
 ## #   weaning_d <dbl>, birth_or_hatching_weight_g <dbl>, weaning_weight_g <dbl>,
@@ -513,19 +513,19 @@ amniota
 
 ```
 ## # A tibble: 21,322 x 36
-##    class order family genus species subspecies common_name female_maturity…
+##    class order family genus species subspecies common_name female_maturity<U+2026>
 ##    <chr> <chr> <chr>  <chr> <chr>        <dbl> <chr>                  <dbl>
-##  1 Aves  Acci… Accip… Acci… albogu…         NA Pied Gosha…              NA 
-##  2 Aves  Acci… Accip… Acci… badius          NA Shikra                  363.
-##  3 Aves  Acci… Accip… Acci… bicolor         NA Bicolored …              NA 
-##  4 Aves  Acci… Accip… Acci… brachy…         NA New Britai…              NA 
-##  5 Aves  Acci… Accip… Acci… brevip…         NA Levant Spa…             363.
-##  6 Aves  Acci… Accip… Acci… castan…         NA Chestnut-f…              NA 
-##  7 Aves  Acci… Accip… Acci… chilen…         NA Chilean Ha…              NA 
-##  8 Aves  Acci… Accip… Acci… chiono…         NA White-brea…             548.
-##  9 Aves  Acci… Accip… Acci… cirroc…         NA Collared S…              NA 
-## 10 Aves  Acci… Accip… Acci… cooper…         NA Cooper's H…             730 
-## # … with 21,312 more rows, and 28 more variables:
+##  1 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> albogu<U+2026>         NA Pied Gosha<U+2026>              NA 
+##  2 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> badius          NA Shikra                  363.
+##  3 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> bicolor         NA Bicolored <U+2026>              NA 
+##  4 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> brachy<U+2026>         NA New Britai<U+2026>              NA 
+##  5 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> brevip<U+2026>         NA Levant Spa<U+2026>             363.
+##  6 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> castan<U+2026>         NA Chestnut-f<U+2026>              NA 
+##  7 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> chilen<U+2026>         NA Chilean Ha<U+2026>              NA 
+##  8 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> chiono<U+2026>         NA White-brea<U+2026>             548.
+##  9 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> cirroc<U+2026>         NA Collared S<U+2026>              NA 
+## 10 Aves  Acci<U+2026> Accip<U+2026> Acci<U+2026> cooper<U+2026>         NA Cooper's H<U+2026>             730 
+## # <U+2026> with 21,312 more rows, and 28 more variables:
 ## #   litter_or_clutch_size_n <dbl>, litters_or_clutches_per_y <dbl>,
 ## #   adult_body_mass_g <dbl>, maximum_longevity_y <dbl>, gestation_d <dbl>,
 ## #   weaning_d <dbl>, birth_or_hatching_weight_g <dbl>, weaning_weight_g <dbl>,
@@ -560,7 +560,7 @@ naniar::miss_var_summary(amniota)
 ##  8 egg_length_mm                   20702     97.1
 ##  9 weaning_weight_g                20258     95.0
 ## 10 female_svl_cm                   20242     94.9
-## # … with 26 more rows
+## # <U+2026> with 26 more rows
 ```
 
 
@@ -582,7 +582,7 @@ naniar::miss_var_summary(amphibio)
 ##  8 Wet_cold   6625     97.8
 ##  9 Crepu      6608     97.5
 ## 10 Dry_warm   6572     97.0
-## # … with 28 more rows
+## # <U+2026> with 28 more rows
 ```
 
 
@@ -711,17 +711,17 @@ amphibio
 ## # A tibble: 6,776 x 38
 ##    id    Order Family Genus Species   Fos   Ter   Aqu   Arb Leaves Flowers Seeds
 ##    <chr> <chr> <chr>  <chr> <chr>   <dbl> <dbl> <dbl> <dbl>  <dbl>   <dbl> <lgl>
-##  1 Anf0… Anura Allop… Allo… Alloph…    NA     1     1     1     NA      NA NA   
-##  2 Anf0… Anura Alyti… Alyt… Alytes…    NA     1     1     1     NA      NA NA   
-##  3 Anf0… Anura Alyti… Alyt… Alytes…    NA     1     1     1     NA      NA NA   
-##  4 Anf0… Anura Alyti… Alyt… Alytes…    NA     1     1     1     NA      NA NA   
-##  5 Anf0… Anura Alyti… Alyt… Alytes…    NA     1    NA     1     NA      NA NA   
-##  6 Anf0… Anura Alyti… Alyt… Alytes…     1     1     1     1     NA      NA NA   
-##  7 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-##  8 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-##  9 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-## 10 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-## # … with 6,766 more rows, and 26 more variables: Fruits <dbl>, Arthro <dbl>,
+##  1 Anf0<U+2026> Anura Allop<U+2026> Allo<U+2026> Alloph<U+2026>    NA     1     1     1     NA      NA NA   
+##  2 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1     1     1     NA      NA NA   
+##  3 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1     1     1     NA      NA NA   
+##  4 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1     1     1     NA      NA NA   
+##  5 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1    NA     1     NA      NA NA   
+##  6 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>     1     1     1     1     NA      NA NA   
+##  7 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+##  8 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+##  9 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+## 10 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+## # <U+2026> with 6,766 more rows, and 26 more variables: Fruits <dbl>, Arthro <dbl>,
 ## #   Vert <dbl>, Diu <dbl>, Noc <dbl>, Crepu <dbl>, Wet_warm <dbl>,
 ## #   Wet_cold <dbl>, Dry_warm <dbl>, Dry_cold <dbl>, Body_mass_g <dbl>,
 ## #   Age_at_maturity_min_y <dbl>, Age_at_maturity_max_y <dbl>,
@@ -760,17 +760,17 @@ amphibio
 ## # A tibble: 6,776 x 38
 ##    id    Order Family Genus Species   Fos   Ter   Aqu   Arb Leaves Flowers Seeds
 ##    <chr> <chr> <chr>  <chr> <chr>   <dbl> <dbl> <dbl> <dbl>  <dbl>   <dbl> <lgl>
-##  1 Anf0… Anura Allop… Allo… Alloph…    NA     1     1     1     NA      NA NA   
-##  2 Anf0… Anura Alyti… Alyt… Alytes…    NA     1     1     1     NA      NA NA   
-##  3 Anf0… Anura Alyti… Alyt… Alytes…    NA     1     1     1     NA      NA NA   
-##  4 Anf0… Anura Alyti… Alyt… Alytes…    NA     1     1     1     NA      NA NA   
-##  5 Anf0… Anura Alyti… Alyt… Alytes…    NA     1    NA     1     NA      NA NA   
-##  6 Anf0… Anura Alyti… Alyt… Alytes…     1     1     1     1     NA      NA NA   
-##  7 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-##  8 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-##  9 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-## 10 Anf0… Anura Alyti… Disc… Discog…     1     1     1    NA     NA      NA NA   
-## # … with 6,766 more rows, and 26 more variables: Fruits <dbl>, Arthro <dbl>,
+##  1 Anf0<U+2026> Anura Allop<U+2026> Allo<U+2026> Alloph<U+2026>    NA     1     1     1     NA      NA NA   
+##  2 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1     1     1     NA      NA NA   
+##  3 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1     1     1     NA      NA NA   
+##  4 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1     1     1     NA      NA NA   
+##  5 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>    NA     1    NA     1     NA      NA NA   
+##  6 Anf0<U+2026> Anura Alyti<U+2026> Alyt<U+2026> Alytes<U+2026>     1     1     1     1     NA      NA NA   
+##  7 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+##  8 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+##  9 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+## 10 Anf0<U+2026> Anura Alyti<U+2026> Disc<U+2026> Discog<U+2026>     1     1     1    NA     NA      NA NA   
+## # <U+2026> with 6,766 more rows, and 26 more variables: Fruits <dbl>, Arthro <dbl>,
 ## #   Vert <dbl>, Diu <dbl>, Noc <dbl>, Crepu <dbl>, Wet_warm <dbl>,
 ## #   Wet_cold <dbl>, Dry_warm <dbl>, Dry_cold <dbl>, Body_mass_g <dbl>,
 ## #   Age_at_maturity_min_y <dbl>, Age_at_maturity_max_y <dbl>,
