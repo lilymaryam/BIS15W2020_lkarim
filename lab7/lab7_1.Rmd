@@ -41,7 +41,7 @@ library(tidyverse)
 
 Shiny apps can be designed to do almost anything you can imagine. They are very useful for making specialized tools for specific needs in business and research, or just for fun! Let's run a basic example on our computer. Type the following into the R console. You should have the file `plot_iris.R` in your working directory. Use the drop down menus to change the x and y axes on the plot. 
 ```{r}
-#runApp("plot_iris.R")
+runApp("plot_iris.R")
 ```
 
 ## Shiny App Skeleton
@@ -50,6 +50,7 @@ A shiny app consists of a user interface (ui) function, server function, and run
 
 Below is a bare bones shiny app. You can get this code shippet by typing `shinyapp`. It doesn't do anything because we haven't created any inputs with the ui or any outputs with the server. Copy and paste the code or get it by typing `shinyapp`, and hit shift+tab.  
 ```{r}
+
 ui <- fluidPage()
 
 server <- function(input, output, session) {}
@@ -64,6 +65,7 @@ For the rest of the lab we will work together to build the example app.
 There are many types of inputs in shiny, see the [shiny cheat sheet](https://shiny.rstudio.com/images/shiny-cheatsheet.pdf). Our example app uses `selectInput()`, which takes a set of predefined choices and supplies them to the user. We are working with the iris data set, so we want the selections to be the names of the data frame. Let's get the names of the iris data frame and add them as a `selectInput()` to our ui. `selectInput()` takes several arguments including the label that the server function will use, the label that will display to the user, the selection choices, and the initially selected choice. 
 ```{r}
 names(iris)
+glimpse(iris)
 ```
 
 We won't use the name `Species` because that will be the `ggplot` grouping variable. Copy and paste the code below and run the app to see our new input. 
@@ -150,28 +152,51 @@ homerange <- readr::read_csv("data/Tamburelloetal_HomeRangeDatabase.csv", na = c
 ```
 
 2. Build a shiny app that produces a barplot that explores locomotion type with a fill reaction for the variables trophic.guild and thermoregulation.
+```{r}
+
+
+
+ui <- fluidPage(
+  selectInput("x", "Select Variable", choices = c("trophic.guild", "thermoregulation"), 
+              selected = "trophic.guild"),
+  plotOutput("plot", width = "500px", height = "400px")
+)
+
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    ggplot(homerange, aes_string(x = "locomotion", fill = input$x)) + 
+      geom_bar() + 
+      theme_light(base_size = 18)
+  })
+
+}
+
+shinyApp(ui, server)
+
+```
+
 
 
 3. The app below adds some nicer aesthetics. It makes a density plot of log10.hra with taxon as a reactive variable. Edit the app to explore log10.hra by locomotion type.  
 ```{r}
 ui <- fluidPage(    
   
-  titlePanel("Log 10 Homerange by Taxon"), # give the page a title
+  titlePanel("Log 10 Homerange by Locomotion"), # give the page a title
   
   # generate a row with a sidebar
   sidebarLayout(      
     
     # define the sidebar with one input
     sidebarPanel(
-      selectInput("taxon", " Select Taxon of Interest:", 
-                  choices=unique(homerange$taxon)),
+      selectInput("locomotion", " Select Locomotion of Interest:", 
+                  choices=unique(homerange$locomotion)),
       hr(),
       helpText("Reference: Tamburello N, Cote IM, Dulvy NK (2015) Energy and the scaling of animal space use. The American Naturalist 186(2):196-211.")
     ),
     
     # create a spot for the barplot
     mainPanel(
-      plotOutput("taxonPlot")  
+      plotOutput("locomotionPlot")  
     )
     
   )
@@ -181,10 +206,10 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   # fill in the spot we created for a plot
-  output$taxonPlot <- renderPlot({
+  output$locomotionPlot <- renderPlot({
     
     homerange %>% 
-    filter(taxon == input$taxon) %>% 
+    filter(locomotion == input$locomotion) %>% 
     ggplot(aes(x=log10.hra)) + 
     geom_density(color="black", fill="steelblue", alpha=0.6)
   })
