@@ -113,9 +113,21 @@ ggplot(data = gapminder, mapping = aes(x = continent, y = lifeExp))+geom_boxplot
 **5. How has life expectancy changed between 1952-2007 for each continent? Try using `geom_line()` for this, including all continents on the same  plot.**
 
 ```{r}
-gapminder %>% 
-  filter(year>=1952 & year <= 2007) %>% 
-  ggplot(aes(x = year, y=lifeExp, color = continent))+geom_line()+labs(title="Changes in Life Expectancy on Each Continent", x = "year", y = "life expectancy" )
+glimpse(gapminder)
+```
+
+
+```{r}
+gapminder$year <- as.factor(gapminder$year)
+glimpse(gapminder)
+```
+
+```{r}
+gapminder %>%
+  group_by(continent, year) %>% 
+  summarize(lifeexp = mean(lifeExp)) %>% 
+  ggplot(aes(x = year, y=lifeexp, group=continent, color=continent))+
+  geom_line()+labs(title="Changes in Life Expectancy on Each Continent", x = "year", y = "life expectancy" )
 ```
 
 ```{r}
@@ -153,16 +165,15 @@ gapminder %>%
 
 
 ```{r}
-gapminder1 <- 
-  gapminder %>% 
-  group_by(country) %>%  
-  filter(year >= 1952) %>%
-  summarize(pop1 = first(pop),
-            pop2 = max(pop),
-            diffpop = pop2 - pop1) %>% 
-  arrange(desc(diffpop))
+gapminder %>% 
+  select(country,year,pop) %>%  
+  filter(year == 1952 | year == 2007) %>%
+  pivot_wider(names_from = year, 
+              values_from = pop) %>% 
+  mutate(diff = `2007`- `1952`)%>% 
+  arrange(desc(diff))
   
-gapminder1
+
 ```
 
 
