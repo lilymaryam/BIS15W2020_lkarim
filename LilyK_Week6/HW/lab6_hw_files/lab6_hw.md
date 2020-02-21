@@ -42,12 +42,12 @@ glimpse(gapminder)
 ```
 ## Observations: 1,704
 ## Variables: 6
-## $ country   <fct> Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghani…
-## $ continent <fct> Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia,…
-## $ year      <int> 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997,…
-## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.…
-## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 1…
-## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134,…
+## $ country   <fct> Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghani<U+2026>
+## $ continent <fct> Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia,<U+2026>
+## $ year      <int> 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997,<U+2026>
+## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.<U+2026>
+## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 1<U+2026>
+## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134,<U+2026>
 ```
 
 
@@ -1914,12 +1914,48 @@ ggplot(data = gapminder, mapping = aes(x = continent, y = lifeExp))+geom_boxplot
 
 
 ```r
-gapminder %>% 
-  filter(year>=1952 & year <= 2007) %>% 
-  ggplot(aes(x = year, y=lifeExp, color = continent))+geom_line()+labs(title="Changes in Life Expectancy on Each Continent", x = "year", y = "life expectancy" )
+glimpse(gapminder)
 ```
 
-![](lab6_hw_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+```
+## Observations: 1,704
+## Variables: 6
+## $ country   <fct> Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghani<U+2026>
+## $ continent <fct> Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia,<U+2026>
+## $ year      <int> 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997,<U+2026>
+## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.<U+2026>
+## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 1<U+2026>
+## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134,<U+2026>
+```
+
+
+
+```r
+gapminder$year <- as.factor(gapminder$year)
+glimpse(gapminder)
+```
+
+```
+## Observations: 1,704
+## Variables: 6
+## $ country   <fct> Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghani<U+2026>
+## $ continent <fct> Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia,<U+2026>
+## $ year      <fct> 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997,<U+2026>
+## $ lifeExp   <dbl> 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.<U+2026>
+## $ pop       <int> 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 1<U+2026>
+## $ gdpPercap <dbl> 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134,<U+2026>
+```
+
+
+```r
+gapminder %>%
+  group_by(continent, year) %>% 
+  summarize(lifeexp = mean(lifeExp)) %>% 
+  ggplot(aes(x = year, y=lifeexp, group=continent, color=continent))+
+  geom_line()+labs(title="Changes in Life Expectancy on Each Continent", x = "year", y = "life expectancy" )
+```
+
+![](lab6_hw_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 
 ```r
@@ -1928,19 +1964,19 @@ gapminder
 
 ```
 ## # A tibble: 1,704 x 6
-##    country     continent  year lifeExp      pop gdpPercap
-##    <fct>       <fct>     <int>   <dbl>    <int>     <dbl>
-##  1 Afghanistan Asia       1952    28.8  8425333      779.
-##  2 Afghanistan Asia       1957    30.3  9240934      821.
-##  3 Afghanistan Asia       1962    32.0 10267083      853.
-##  4 Afghanistan Asia       1967    34.0 11537966      836.
-##  5 Afghanistan Asia       1972    36.1 13079460      740.
-##  6 Afghanistan Asia       1977    38.4 14880372      786.
-##  7 Afghanistan Asia       1982    39.9 12881816      978.
-##  8 Afghanistan Asia       1987    40.8 13867957      852.
-##  9 Afghanistan Asia       1992    41.7 16317921      649.
-## 10 Afghanistan Asia       1997    41.8 22227415      635.
-## # … with 1,694 more rows
+##    country     continent year  lifeExp      pop gdpPercap
+##    <fct>       <fct>     <fct>   <dbl>    <int>     <dbl>
+##  1 Afghanistan Asia      1952     28.8  8425333      779.
+##  2 Afghanistan Asia      1957     30.3  9240934      821.
+##  3 Afghanistan Asia      1962     32.0 10267083      853.
+##  4 Afghanistan Asia      1967     34.0 11537966      836.
+##  5 Afghanistan Asia      1972     36.1 13079460      740.
+##  6 Afghanistan Asia      1977     38.4 14880372      786.
+##  7 Afghanistan Asia      1982     39.9 12881816      978.
+##  8 Afghanistan Asia      1987     40.8 13867957      852.
+##  9 Afghanistan Asia      1992     41.7 16317921      649.
+## 10 Afghanistan Asia      1997     41.8 22227415      635.
+## # <U+2026> with 1,694 more rows
 ```
 
 
@@ -1952,7 +1988,7 @@ gapminder %>%
   ggplot(aes(x= gdpPercap, y= lifeExp))+geom_jitter()+labs(title = "GDP per capita vs. Life Expectancy")
 ```
 
-![](lab6_hw_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](lab6_hw_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 
 
@@ -1964,7 +2000,7 @@ gapminder %>%
   ggplot(aes(x= gdpPercap, y= lifeExp))+geom_jitter()+scale_x_log10()+labs(title = "GDP per capita vs. Life Expectancy", x = "log10 of GDP per cap")
 ```
 
-![](lab6_hw_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](lab6_hw_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 The logarithmic graph is linear, indicating an exponential relationship
 
 
@@ -1979,39 +2015,36 @@ gapminder %>%
 
 ```
 ## # A tibble: 1,704 x 6
-##    country     continent  year lifeExp      pop gdpPercap
-##    <fct>       <fct>     <int>   <dbl>    <int>     <dbl>
-##  1 Afghanistan Asia       1952    28.8  8425333      779.
-##  2 Albania     Europe     1952    55.2  1282697     1601.
-##  3 Algeria     Africa     1952    43.1  9279525     2449.
-##  4 Angola      Africa     1952    30.0  4232095     3521.
-##  5 Argentina   Americas   1952    62.5 17876956     5911.
-##  6 Australia   Oceania    1952    69.1  8691212    10040.
-##  7 Austria     Europe     1952    66.8  6927772     6137.
-##  8 Bahrain     Asia       1952    50.9   120447     9867.
-##  9 Bangladesh  Asia       1952    37.5 46886859      684.
-## 10 Belgium     Europe     1952    68    8730405     8343.
-## # … with 1,694 more rows
+##    country     continent year  lifeExp      pop gdpPercap
+##    <fct>       <fct>     <fct>   <dbl>    <int>     <dbl>
+##  1 Afghanistan Asia      1952     28.8  8425333      779.
+##  2 Albania     Europe    1952     55.2  1282697     1601.
+##  3 Algeria     Africa    1952     43.1  9279525     2449.
+##  4 Angola      Africa    1952     30.0  4232095     3521.
+##  5 Argentina   Americas  1952     62.5 17876956     5911.
+##  6 Australia   Oceania   1952     69.1  8691212    10040.
+##  7 Austria     Europe    1952     66.8  6927772     6137.
+##  8 Bahrain     Asia      1952     50.9   120447     9867.
+##  9 Bangladesh  Asia      1952     37.5 46886859      684.
+## 10 Belgium     Europe    1952     68    8730405     8343.
+## # <U+2026> with 1,694 more rows
 ```
 
 
 
 ```r
-gapminder1 <- 
-  gapminder %>% 
-  group_by(country) %>%  
-  filter(year >= 1952) %>%
-  summarize(pop1 = first(pop),
-            pop2 = max(pop),
-            diffpop = pop2 - pop1) %>% 
-  arrange(desc(diffpop))
-  
-gapminder1
+gapminder %>% 
+  select(country,year,pop) %>%  
+  filter(year == 1952 | year == 2007) %>%
+  pivot_wider(names_from = year, 
+              values_from = pop) %>% 
+  mutate(diff = `2007`- `1952`)%>% 
+  arrange(desc(diff))
 ```
 
 ```
 ## # A tibble: 142 x 4
-##    country            pop1       pop2   diffpop
+##    country          `1952`     `2007`      diff
 ##    <fct>             <int>      <int>     <int>
 ##  1 China         556263527 1318683096 762419569
 ##  2 India         372000000 1110396331 738396331
@@ -2023,7 +2056,7 @@ gapminder1
 ##  8 Nigeria        33119096  135031164 101912068
 ##  9 Mexico         30144317  108700891  78556574
 ## 10 Philippines    22438691   91077287  68638596
-## # … with 132 more rows
+## # <U+2026> with 132 more rows
 ```
 
 
@@ -2037,7 +2070,7 @@ gapminder %>%
   ggplot(aes(x  = year, y = pop, fill = country, color = country))+geom_jitter()
 ```
 
-![](lab6_hw_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+![](lab6_hw_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
 
 **10. How does per capita GDP growth compare between these same five countries?**
@@ -2050,7 +2083,7 @@ gapminder %>%
   ggplot(aes(x = year, y = gdpPercap, color  = country))+geom_jitter()
 ```
 
-![](lab6_hw_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+![](lab6_hw_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
 
 
 
