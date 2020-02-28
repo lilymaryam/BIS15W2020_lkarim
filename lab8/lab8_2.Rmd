@@ -48,6 +48,7 @@ dengue <- read.fasta(file = "data/den1.fasta")
 But the sequence is still stored as the first item in the R list, so let's pull it out using double square brackets
 ```{r}
 dengueseq <- dengue[[1]]
+dengueseq
 ```
 
 Now we can look at the sequence and learn couple things about it. For example, we can find out how long our sequence is.
@@ -68,22 +69,34 @@ GC(dengueseq)
 ##Practice
 1. Using one of the lizard accession numbers from the first half of class, pull that sequence on it's own from GenBank, store it as a .fasta file, and read it into R. Then pull the sequence out of the R list using double square brackets.
 ```{r}
+lizardseq <- read.GenBank("JF806202", as.character = T)
 
+```
+```{r}
+write.dna(lizardseq, file ="lizard_fasta_2.fasta", format = "fasta", append = FALSE, nbcol = 6, colsep = " ", colw = 10)
+```
+
+```{r}
+lizard2 <- read.fasta(file = "lizard_fasta_2.fasta")
+```
+
+```{r}
+liz2 <- lizard2[[1]]
 ```
 
 2. What is the length of this sequence?
 ```{r}
-
+length(liz2)
 ```
 
 3. Generate a table showing the nucleotide base composition of your chosen sequence.
 ```{r}
-
+table(liz2)
 ```
 
 4. What is the GC content of the sequence you've chosen?
 ```{r}
-
+GC(liz2)
 ```
 
 
@@ -154,4 +167,8 @@ source("essai.r")
 ```
 
 ## Practice
-Oh no! You have presented your gopher-louse tree to your boss who responds, "Oh no! Not Jukes and Cantor! We must use the Kimura's 2-parameters distance model." But you're not bothered, you just open the essai.r script in your text editor and replace model = "JC69" with model = "K80". Edit your script and rerun it to generate your trees under this model of evolution. Are the results different than those generated above?  
+Oh no! You have presented your gopher-louse tree to your boss who responds, "Oh no! Not Jukes and Cantor! We must use the Kimura's 2-parameters distance model." But you're not bothered, you just open the essai.r script in your text editor and replace model = "JC69" with model = "K80". Edit your script and rerun it to generate your trees under this model of evolution. Are the results different than those generated above? 
+```{r}
+source("essai.r")
+```
+

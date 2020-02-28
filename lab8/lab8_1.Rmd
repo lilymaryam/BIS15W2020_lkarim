@@ -49,8 +49,8 @@ With BLASTn we can take a sequence we have acquired (perhaps through sequencing)
 
 SeqinR (Sequences in R) and ape (Analysis of Phylogenetics and Evolution) are packages which include many utilities for dealing with sequence data in R. 
 ```{r cars}
-#install.packages("seqinr")
-#install.packages("ape")
+install.packages("seqinr")
+install.packages("ape")
 ```
 
 ```{r}
@@ -168,17 +168,19 @@ Open this file in your text editor and have a look. You have downnloaded and for
 
 1. Create your own search of the NCBI nucleotide database using `entrez_search()` for RAG1 sequences of _Ornithorhynchus anatinus_. Limit your returned hits to 10. What is _Ornithorhynchus anatinus_?
 ```{r}
-
+lepto_search <- entrez_search(db="nuccore", term= "Calileptoneta[Organism]", retmax=10)
+lepto_search
 ```
 
 2. Use `entrez_fetch()` to return your database hits as a character vector.
 ```{r}
-
+lepto_seqs <- entrez_fetch(db="nuccore", id=lepto_search$ids, rettype="fasta")
+lepto_seqs
 ```
 
 3. Now store your own pulled sequence data as a .fasta file using the `write()` function. Remember those line endings!
 ```{r}
-
+write(lepto_seqs, "lepto_fasta_2.fasta", sep = "\n")
 ```
 
 ## That's it, let's take a break!   
