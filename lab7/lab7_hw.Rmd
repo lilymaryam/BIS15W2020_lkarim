@@ -74,7 +74,9 @@ server <- function(input, output, session) {
   
   # the code to make the plot of iris data grouped by species
   output$plot <- renderPlot({
-    ggplot(UC_admit, aes_string(x = input$x, y = "FilteredCountFR", fill = "Ethnicity")) + geom_bar(stat="identity") + theme_light(base_size = 10)
+    UC_admit %>% 
+      filter()
+    ggplot(UC_admit, aes_string(x = "Ethnicity", y = "FilteredCountFR")) + geom_bar(stat="identity") + theme_light(base_size = 10)
   })
   
   # stop the app when we close it
