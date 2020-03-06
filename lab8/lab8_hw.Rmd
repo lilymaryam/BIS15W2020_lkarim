@@ -71,7 +71,7 @@ covid_search
 
 ```{r}
 covid_seqs <- entrez_fetch(db="nuccore", id=covid_search$ids, rettype="fasta")
-covid_seqs
+
 ```
 
 
@@ -83,7 +83,5 @@ write(covid_seqs, "covid_seqsfasta_2.fasta", sep = "\n")
 covids <- read.fasta(file = "covid_seqsfasta_2.fasta")
 ```
 
-```{r}
-covids
-```
+
 
