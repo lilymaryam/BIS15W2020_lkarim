@@ -93,7 +93,7 @@ fisheries <-
                ISSCAAP_spgroupname = `ISSCAAP taxonomic group`,
                FAO_area = `FAO major fishing area`,
                unit = Measure)
-fisheries
+
                
 ```
 
@@ -106,7 +106,7 @@ fisheries_tidy <-
   pivot_longer(`1950`:`2012`,
                names_to = "year",
                values_to = "catch")
-fisheries_tidy
+
 ```
 
 
@@ -116,7 +116,7 @@ fisheries_tidy
 fisheries_tidy2 <- 
   fisheries_tidy %>% 
   select(country, ISSCAAP_spgroupname, ASFIS_spcode, ASFIS_sciname, year, catch)
-fisheries_tidy2
+
 ```
 
 
@@ -190,15 +190,12 @@ The species with the highest catch total of the five countries was Dosiducus gig
 ```{r}
 cephalopod_stats <- 
   fisheries_tidy2 %>% 
-  filter(country == c("China", "Peru", "Korea", "Japan", "Chile")) %>% 
+  filter(country == "China" | country ==  "Peru" | country == "Korea" | country == "Japan" | country == "Chile") %>% 
   filter(str_detect(ISSCAAP_spgroupname, "Squids")) %>% 
   filter(year <=2012 &year >=2008) %>% 
   group_by(ASFIS_sciname) %>% 
   summarise(catch = sum(catch, na.rm = T)) %>% 
-  arrange(desc(catch)) 
-
-cephalopod_stats
-
+  arrange(desc(catch))
 ```
 
 
