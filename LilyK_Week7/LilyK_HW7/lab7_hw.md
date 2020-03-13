@@ -1,7 +1,7 @@
 ---
 title: "Lab 7 Homework"
 author: "Lily Karim"
-date: "2020-02-28"
+date: "2020-03-13"
 output:
   html_document: 
     keep_md: yes
@@ -74,26 +74,7 @@ UC_admit %>%
 ## [1] TRUE
 ```
 
-```r
-UC_admit
-```
 
-```
-## # A tibble: 2,160 x 6
-##    Campus Academic_Yr Category   Ethnicity        `Perc FR` FilteredCountFR
-##    <chr>        <dbl> <chr>      <chr>            <chr>               <dbl>
-##  1 Davis         2019 Applicants International    21.16%              16522
-##  2 Davis         2019 Applicants Unknown          2.51%                1959
-##  3 Davis         2019 Applicants White            18.39%              14360
-##  4 Davis         2019 Applicants Asian            30.76%              24024
-##  5 Davis         2019 Applicants Chicano/Latino   22.44%              17526
-##  6 Davis         2019 Applicants American Indian  0.35%                 277
-##  7 Davis         2019 Applicants African American 4.39%                3425
-##  8 Davis         2019 Applicants All              100.00%             78093
-##  9 Davis         2018 Applicants International    19.87%              15507
-## 10 Davis         2018 Applicants Unknown          2.83%                2208
-## # … with 2,150 more rows
-```
 
 
 
@@ -102,24 +83,6 @@ UC_admit
 
 ```r
 UC_admit <- na.omit(UC_admit)
-UC_admit
-```
-
-```
-## # A tibble: 2,159 x 6
-##    Campus Academic_Yr Category   Ethnicity        `Perc FR` FilteredCountFR
-##    <chr>        <dbl> <chr>      <chr>            <chr>               <dbl>
-##  1 Davis         2019 Applicants International    21.16%              16522
-##  2 Davis         2019 Applicants Unknown          2.51%                1959
-##  3 Davis         2019 Applicants White            18.39%              14360
-##  4 Davis         2019 Applicants Asian            30.76%              24024
-##  5 Davis         2019 Applicants Chicano/Latino   22.44%              17526
-##  6 Davis         2019 Applicants American Indian  0.35%                 277
-##  7 Davis         2019 Applicants African American 4.39%                3425
-##  8 Davis         2019 Applicants All              100.00%             78093
-##  9 Davis         2018 Applicants International    19.87%              15507
-## 10 Davis         2018 Applicants Unknown          2.83%                2208
-## # … with 2,149 more rows
 ```
 
 
@@ -140,10 +103,13 @@ ui <- dashboardPage(
   dashboardSidebar(),
   dashboardBody(
   fluidRow(
-  box(title = "Variables", width = 3,
-  selectInput("x", "Select", choices = c("Campus", "Academic_Yr", "Category"), selected = "Campus"),
+  box(title = "Plots", width = 3,
+  selectInput("x", "Year", choices = unique(UC_admit$Academic_Yr), selected = "2010"),
+  selectInput("y", "Campus", choices = unique(UC_admit$Campus), selected = "Davis"),
+  selectInput("z", "Category", choices = unique(UC_admit$Category), selected = "Applicants")
   ), # close the first box
-  box(title = "Plot ", width = 7,
+  
+  box(title = "UC Admissions", width = 7,
   plotOutput("plot", width = "600px", height = "500px")
   ) # close the second box
   ) # close the row
@@ -154,7 +120,9 @@ server <- function(input, output, session) {
   
   # the code to make the plot of iris data grouped by species
   output$plot <- renderPlot({
-    ggplot(UC_admit, aes_string(x = input$x, y = "FilteredCountFR", fill = "Ethnicity")) + geom_bar(stat="identity") + theme_light(base_size = 10)
+    UC_admit %>% 
+      filter(Academic_Yr==input$x & Campus==input$y & Category==input$z) %>% 
+      ggplot(aes(x = reorder(Ethnicity, FilteredCountFR), y = FilteredCountFR)) + geom_bar(stat="identity") +labs(x = "Ethnicity", y = "Number of People")+ theme_light(base_size = 10)
   })
   
   # stop the app when we close it
@@ -177,9 +145,9 @@ ui <- dashboardPage(
   dashboardBody(
   fluidRow(
   box(title = "Variables", width = 3,
-  selectInput("campus", "Choose Campus", choices = unique(UC_admit$Campus), selected = "Davis"),
-  selectInput("year", "Choose Year", choices = unique(UC_admit$Academic_Yr), selected = "2019"),
-  selectInput("x", "Select", choices = c("Ethnicity", "Category"), selected = "Ethnicity"),
+  selectInput("x", "Choose Campus", choices = unique(UC_admit$Campus), selected = "Davis"),
+  selectInput("y", "Choose Category", choices = unique(UC_admit$Category), selected = "Applicants"),
+  selectInput("z", "Choose Ethnicity", choices = unique(UC_admit$Ethnicity), selected = "International"),
   
   ), # close the first box
   box(title = "Plot ", width = 7,
@@ -193,7 +161,9 @@ server <- function(input, output, session) {
   
   # the code to make the plot of iris data grouped by species
   output$plot <- renderPlot({
-    ggplot(UC_admit, aes_string(x = input$x, y = "FilteredCountFR")) + geom_bar(stat="identity") + theme_light(base_size = 10)
+    UC_admit %>% 
+      filter(Campus == input$x, Category == input$y, Ethnicity == input$z) %>%
+      ggplot(aes(x = Academic_Yr, y = FilteredCountFR)) + geom_bar(stat="identity") + theme_light(base_size = 10)+labs(x = "Year", y = "Admissions")
   })
   
   # stop the app when we close it

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Lily Karim" />
 
-<meta name="date" content="2020-02-28" />
+<meta name="date" content="2020-03-13" />
 
 <title>Lab 7 Homework</title>
 
@@ -389,7 +389,7 @@ summary {
 
 <h1 class="title toc-ignore">Lab 7 Homework</h1>
 <h4 class="author">Lily Karim</h4>
-<h4 class="date">2020-02-28</h4>
+<h4 class="date">2020-03-13</h4>
 
 </div>
 
@@ -438,38 +438,8 @@ library(shinydashboard)</code></pre>
 <pre class="r"><code>UC_admit %&gt;% 
   anyNA()</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>UC_admit</code></pre>
-<pre><code>## # A tibble: 2,160 x 6
-##    Campus Academic_Yr Category   Ethnicity        `Perc FR` FilteredCountFR
-##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;               &lt;dbl&gt;
-##  1 Davis         2019 Applicants International    21.16%              16522
-##  2 Davis         2019 Applicants Unknown          2.51%                1959
-##  3 Davis         2019 Applicants White            18.39%              14360
-##  4 Davis         2019 Applicants Asian            30.76%              24024
-##  5 Davis         2019 Applicants Chicano/Latino   22.44%              17526
-##  6 Davis         2019 Applicants American Indian  0.35%                 277
-##  7 Davis         2019 Applicants African American 4.39%                3425
-##  8 Davis         2019 Applicants All              100.00%             78093
-##  9 Davis         2018 Applicants International    19.87%              15507
-## 10 Davis         2018 Applicants Unknown          2.83%                2208
-## # … with 2,150 more rows</code></pre>
 <p><strong>2. The president of UC has asked you to build a shiny app that shows admissions by ethnicity across all UC campuses. Your app should allow users to explore year, campus, and admit category as interactive variables. Use shiny dashboard and try to incorporate the aesthetics you have learned in ggplot to make the app neat and clean.</strong></p>
-<pre class="r"><code>UC_admit &lt;- na.omit(UC_admit)
-UC_admit</code></pre>
-<pre><code>## # A tibble: 2,159 x 6
-##    Campus Academic_Yr Category   Ethnicity        `Perc FR` FilteredCountFR
-##    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;               &lt;dbl&gt;
-##  1 Davis         2019 Applicants International    21.16%              16522
-##  2 Davis         2019 Applicants Unknown          2.51%                1959
-##  3 Davis         2019 Applicants White            18.39%              14360
-##  4 Davis         2019 Applicants Asian            30.76%              24024
-##  5 Davis         2019 Applicants Chicano/Latino   22.44%              17526
-##  6 Davis         2019 Applicants American Indian  0.35%                 277
-##  7 Davis         2019 Applicants African American 4.39%                3425
-##  8 Davis         2019 Applicants All              100.00%             78093
-##  9 Davis         2018 Applicants International    19.87%              15507
-## 10 Davis         2018 Applicants Unknown          2.83%                2208
-## # … with 2,149 more rows</code></pre>
+<pre class="r"><code>UC_admit &lt;- na.omit(UC_admit)</code></pre>
 <pre class="r"><code>UC_admit %&gt;% 
   anyNA()</code></pre>
 <pre><code>## [1] FALSE</code></pre>
@@ -478,10 +448,13 @@ UC_admit</code></pre>
   dashboardSidebar(),
   dashboardBody(
   fluidRow(
-  box(title = &quot;Variables&quot;, width = 3,
-  selectInput(&quot;x&quot;, &quot;Select&quot;, choices = c(&quot;Campus&quot;, &quot;Academic_Yr&quot;, &quot;Category&quot;), selected = &quot;Campus&quot;),
+  box(title = &quot;Plots&quot;, width = 3,
+  selectInput(&quot;x&quot;, &quot;Year&quot;, choices = unique(UC_admit$Academic_Yr), selected = &quot;2010&quot;),
+  selectInput(&quot;y&quot;, &quot;Campus&quot;, choices = unique(UC_admit$Campus), selected = &quot;Davis&quot;),
+  selectInput(&quot;z&quot;, &quot;Category&quot;, choices = unique(UC_admit$Category), selected = &quot;Applicants&quot;)
   ), # close the first box
-  box(title = &quot;Plot &quot;, width = 7,
+  
+  box(title = &quot;UC Admissions&quot;, width = 7,
   plotOutput(&quot;plot&quot;, width = &quot;600px&quot;, height = &quot;500px&quot;)
   ) # close the second box
   ) # close the row
@@ -492,7 +465,9 @@ server &lt;- function(input, output, session) {
   
   # the code to make the plot of iris data grouped by species
   output$plot &lt;- renderPlot({
-    ggplot(UC_admit, aes_string(x = input$x, y = &quot;FilteredCountFR&quot;, fill = &quot;Ethnicity&quot;)) + geom_bar(stat=&quot;identity&quot;) + theme_light(base_size = 10)
+    UC_admit %&gt;% 
+      filter(Academic_Yr==input$x &amp; Campus==input$y &amp; Category==input$z) %&gt;% 
+      ggplot(aes(x = reorder(Ethnicity, FilteredCountFR), y = FilteredCountFR)) + geom_bar(stat=&quot;identity&quot;) +labs(x = &quot;Ethnicity&quot;, y = &quot;Number of People&quot;)+ theme_light(base_size = 10)
   })
   
   # stop the app when we close it
@@ -509,9 +484,9 @@ shinyApp(ui, server)</code></pre>
   dashboardBody(
   fluidRow(
   box(title = &quot;Variables&quot;, width = 3,
-  selectInput(&quot;campus&quot;, &quot;Choose Campus&quot;, choices = unique(UC_admit$Campus), selected = &quot;Davis&quot;),
-  selectInput(&quot;year&quot;, &quot;Choose Year&quot;, choices = unique(UC_admit$Academic_Yr), selected = &quot;2019&quot;),
-  selectInput(&quot;x&quot;, &quot;Select&quot;, choices = c(&quot;Ethnicity&quot;, &quot;Category&quot;), selected = &quot;Ethnicity&quot;),
+  selectInput(&quot;x&quot;, &quot;Choose Campus&quot;, choices = unique(UC_admit$Campus), selected = &quot;Davis&quot;),
+  selectInput(&quot;y&quot;, &quot;Choose Category&quot;, choices = unique(UC_admit$Category), selected = &quot;Applicants&quot;),
+  selectInput(&quot;z&quot;, &quot;Choose Ethnicity&quot;, choices = unique(UC_admit$Ethnicity), selected = &quot;International&quot;),
   
   ), # close the first box
   box(title = &quot;Plot &quot;, width = 7,
@@ -525,7 +500,9 @@ server &lt;- function(input, output, session) {
   
   # the code to make the plot of iris data grouped by species
   output$plot &lt;- renderPlot({
-    ggplot(UC_admit, aes_string(x = input$x, y = &quot;FilteredCountFR&quot;)) + geom_bar(stat=&quot;identity&quot;) + theme_light(base_size = 10)
+    UC_admit %&gt;% 
+      filter(Campus == input$x, Category == input$y, Ethnicity == input$z) %&gt;%
+      ggplot(aes(x = Academic_Yr, y = FilteredCountFR)) + geom_bar(stat=&quot;identity&quot;) + theme_light(base_size = 10)+labs(x = &quot;Year&quot;, y = &quot;Admissions&quot;)
   })
   
   # stop the app when we close it
