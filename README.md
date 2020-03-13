@@ -5,7 +5,7 @@
 # The purpose of this class was to introduce high-volume data wrangling, cleaning, and visualizing for biology students.
 
 
-Content
+Content:
 
 Week 1: R, Rstudio, and GitHub
 
